@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import {mapMutations} from 'vuex'
+    // import {mapMutations} from 'vuex'
     export default {
         name: "NeW",
         data() {
@@ -21,23 +21,28 @@
             }
         },
         methods:{
-            ...mapMutations(['createPhoneList','saveLsPhoneList']),
+            // ...mapMutations(['createPhoneList','saveLsPhoneList']),
             save(){
                 if(!this.name){
                     alert('이름을 입력하세요')
                 }else if(!this.number){
                     alert('전화번호를 작성하세요')
                 }else{
-                    this.createPhoneList({
+                //     this.$store.dispatch('createPhoneList',{
+                //         name:this.name,
+                //         number:this.number
+                //     })
+                //     this.$router.push('/')
+                // }
+                    this.$root.createPhoneList({
                         name:this.name,
                         number:this.number
                     })
-                    this.increaseMaxId()
                     this.$router.push('/')
                 }
             },
             increaseMaxId() {
-                this.$store.state.maxId++;
+                this.$root.maxId++;
                 this.saveLsPhoneList()
             },
         }

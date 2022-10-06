@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import {mapMutations} from 'vuex'
+    // import {mapMutations} from 'vuex'
     export default {
         name: "ModiFy",
         data(){
@@ -22,25 +22,25 @@
             }
         },
         methods:{
-            ...mapMutations(['updatePhoneList','saveLsPhoneList','readPhoneList']),
+            // ...mapMutations(['updatePhoneList','saveLsPhoneList','readPhoneList']),
             save(){
                 if(!this.name){
                     alert('이름을 작성해주세요')
                 }else if(!this.number){
                     alert('전화번호를 입력해주세요')
                 }else{
-                    this.updatePhoneList({
+                    this.$root.updatePhoneList({
                         name:this.name,
                         number:this.number,
                         id:this.id
                     })
-                    this.saveLsPhoneList()
+                    this.$root.saveLsPhoneList()
                     this.$router.push('/')
                 }
             }
         },
         created(){
-            const phone = this.readPhoneList(this.$route.params.id)
+            const phone = this.$root.readPhoneList(this.$route.params.id)
             if(phone){
                 this.name=phone.name
                 this.number=phone.number
