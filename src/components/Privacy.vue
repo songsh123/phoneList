@@ -5,25 +5,45 @@
             <button @click="search">검색</button>
         </div>
         <div>
-            <button @click="sort">정렬</button>
-            <button @click="sort2">반대 정렬</button>
+            <el-button @click="sort" type="primary">정렬</el-button>
+            <el-button @click="sort2" type="warning">반대 정렬</el-button>
         </div>
-        <div style="border:black solid">
-            <p v-for="(a,i) in findPhoneList" :key="i" style="text-align:left">
-                {{a.id}}.이름:{{a.name}}<br>
-                전화번호:{{a.number}}<br>
-                <button @click="$router.push('/modify/'+(a.id))">수정</button>
-                <button @click="deleteFnc(a.id)">삭제</button>
-            </p>
-        </div>
+        <el-table :data="findPhoneList" style="width: 100%; font-size:20px;" >
+            <el-table-column   label="Id">
+                <template slot-scope="{row}">
+                    {{row.id}}
+                </template>
+            </el-table-column>
+            <el-table-column label="Name">
+                <template slot-scope="{row}">
+                    {{row.name}}
+                </template>
+            </el-table-column>
+            <el-table-column label="Number">
+                <template slot-scope="{row}">
+                    {{row.number}}
+                </template>
+            </el-table-column>
+            <el-table-column label="Option">
+                <template slot-scope="{row}">
+                    <el-button type="primary" @click="$router.push('/modify/'+(row.id))">수정</el-button>
+                    <el-button type="primary" @click="$store.state.centerDialogVisible = true">삭제</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+        <DiaLog></DiaLog>
     </div>
 </template>
 
 <script>
+    import DiaLog from '@/components/DiaLog'
     // import {mapState}from 'vuex'
      import {mapMutations}from'vuex'
     export default {
         name: "PriVacy",
+        components:{
+            DiaLog
+        },
         data(){
             return{
                 name:'',
@@ -35,10 +55,6 @@
         },
         methods:{
              ...mapMutations(['saveLsPhoneList','deletePhoneList','setDefaultMaxId','loadPhoneList']),
-            deleteFnc(id){
-                this.deletePhoneList(id)
-                this.saveLsPhoneList()
-            },
             search(){
                 this.name = this.value
                 if(!this.name){
@@ -74,7 +90,7 @@
                     }if(y < x){return -1}
                     return 0;
                 })
-            },
+            }
         },
         created(){
             this.findPhoneList=this.$store.state.phoneList
@@ -83,5 +99,4 @@
 </script>
 
 <style scoped>
-
 </style>

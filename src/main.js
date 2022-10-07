@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from '@/router/index'
 import store from '@/store/store'
 import 'element-ui/lib/theme-chalk/index.css';
+import Element from 'element-ui';
+Vue.use(Element, { size: 'small', zIndex: 3000 });
+
 // import el from "element-ui/src/locale/lang/el";
 
 
@@ -16,7 +19,4 @@ new Vue({
         this.$store.commit('setDefaultMaxId')
         this.$store.commit('loadPhoneList');
     }
-
 }).$mount('#app')
-
-

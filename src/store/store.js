@@ -9,11 +9,8 @@ export default new Vuex.Store({
     phoneList: [
       {id: 0, name: 'ssh', number: 1541}
     ],
-    name:'',
-    number:'',
-    id:'',
-    value:'',
-    findPhoneList:[],
+      centerDialogVisible: false,
+      centerDialogVisible2: false
   },
   getters: {
   },
@@ -67,9 +64,20 @@ export default new Vuex.Store({
         }
       }
     },
+    check(state,obj){
+      for(let i=0;i<state.phoneList.length;i++)
+        if(state.phoneList[i].number == obj.number){
+          state.phoneList.splice(i, 1);
+        }
+      //  else{
+      //     alert('전화번호가 일치하지않습니다.')
+      //     return
+      // }
+    },
     saveLsPhoneList(state){
       localStorage.setItem("phoneList", JSON.stringify(state.phoneList))
-    }
+    },
+
   },
   actions: {
     deletePhoneList({commit}, id){
@@ -89,7 +97,7 @@ export default new Vuex.Store({
     },
     setDefaultMaxId({commit}){
       commit('setDefaultMaxId')
-    }
+    },
   },
   modules: {
   },
