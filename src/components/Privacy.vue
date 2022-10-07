@@ -74,12 +74,10 @@
                     }if(y < x){return -1}
                     return 0;
                 })
-            }
+            },
         },
         created(){
             this.findPhoneList=this.$store.state.phoneList
-            // this.setDefaultMaxId()
-            // this.loadPhoneList();
         }
     }
 </script>

@@ -49,7 +49,7 @@ export default new Vuex.Store({
         return pl
       }
     },
-    updatePhoneList(state,obj) {
+    updatePhoneList(state, obj) {
       let pl = state.phoneList.findIndex((item) => item.id === obj.id)
       if (pl >= 0) {
         state.phoneList.splice(pl,1,{
@@ -63,6 +63,7 @@ export default new Vuex.Store({
       for (let i = 0; i < state.phoneList.length; i++) {
         if (state.phoneList[i].id == id) {
           state.phoneList.splice(i, 1);
+          // saveLsPhoneList(state.phoneList)
         }
       }
     },
@@ -71,8 +72,29 @@ export default new Vuex.Store({
     }
   },
   actions: {
-
+    deletePhoneList({commit}, id){
+      commit('deletePhoneList',id);
+    },
+    updatePhoneList({commit, obj}){
+      commit('updatePhoneList',obj);
+    },
+    readPhoneList({commit}, id){
+      commit('readPhoneList',id);
+    },
+    createPhoneList({commit}, obj){
+      commit('createPhoneList',obj);
+    },
+    loadPhoneList({commit}){
+      commit('loadPhoneList')
+    },
+    setDefaultMaxId({commit}){
+      commit('setDefaultMaxId')
+    }
   },
   modules: {
   },
 })
+
+// const saveLsPhoneList = (jsonPhoneList) =>{
+//   localStorage.setItem("phoneList", jsonPhoneList)
+// }

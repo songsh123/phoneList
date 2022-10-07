@@ -12,10 +12,10 @@ new Vue({
     router,
     store,
     render: h => h(App),
-    // created() {
-    //     this.$store.commit['setDefaultMaxId']
-    //     this.$store.commit['loadPhoneList'];
-    // }
+    created() {
+        this.$store.commit('setDefaultMaxId')
+        this.$store.commit('loadPhoneList');
+    }
 
 }).$mount('#app')
 
