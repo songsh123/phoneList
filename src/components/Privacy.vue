@@ -27,11 +27,18 @@
             <el-table-column label="Option">
                 <template slot-scope="{row}">
                     <el-button type="primary" @click="$router.push('/modify/'+(row.id))">수정</el-button>
-                    <el-button type="primary" @click="$store.state.centerDialogVisible = true">삭제</el-button>
+                    <el-button type="primary" @click="deletFnc">삭제</el-button>
                 </template>
             </el-table-column>
         </el-table>
         <DiaLog></DiaLog>
+<!--        <div>-->
+<!--            <button @click="changeLocaleEn">영어버전</button>-->
+<!--            <button @click="changeLocaleKo">한국어버전</button>-->
+<!--            <button @click="changeLocaleJp">일어버전</button>-->
+<!--            <p>{{ $t("textBanana") }}</p>-->
+<!--            <p>{{ $t("textApple") }}</p>-->
+<!--        </div>-->
     </div>
 </template>
 
@@ -51,10 +58,26 @@
                 id:'',
                 value:'',
                 findPhoneList:[],
+                stringBanana: this.$i18n.t("textBanana"),
+                stringApple: this.$i18n.t("textApple"),
+
             }
         },
         methods:{
              ...mapMutations(['saveLsPhoneList','deletePhoneList','setDefaultMaxId','loadPhoneList']),
+            changeLocaleEn(){
+                 this.$i18n.locale = "en";
+            },
+            changeLocaleKo(){
+              this.$i18n.locale = "ko";
+            },
+            changeLocaleJp(){
+                this.$i18n.locale = "jp";
+            },
+            deletFnc(){
+                 // this.deletePhoneList(id)
+                 this.$store.state.centerDialogVisible = true
+            },
             search(){
                 this.name = this.value
                 if(!this.name){

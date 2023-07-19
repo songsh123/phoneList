@@ -13,6 +13,16 @@ export default new Vuex.Store({
       centerDialogVisible2: false
   },
   getters: {
+    readPhoneList(state){
+      return (id) => {
+      console.log(id)
+      let pl = state.phoneList.find((item)=>{
+        return item.id == id
+      })
+      if (pl){
+        return pl
+      }}
+    }
   },
   mutations: {
     setDefaultMaxId(state) {
@@ -69,10 +79,10 @@ export default new Vuex.Store({
         if(state.phoneList[i].number == obj.number){
           state.phoneList.splice(i, 1);
         }
-      //  else{
-      //     alert('전화번호가 일치하지않습니다.')
-      //     return
-      // }
+         else{
+          alert('전화번호가 일치하지않습니다.')
+          return;
+      }
     },
     saveLsPhoneList(state){
       localStorage.setItem("phoneList", JSON.stringify(state.phoneList))
